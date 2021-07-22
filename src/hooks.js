@@ -1,36 +1,39 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react'
 
 export const useEscape = (setAnchorEl) => {
-    const escFunction = useCallback((event) => {
-        if(event.keyCode === 27) {
-            setAnchorEl(null);
-        }
-    }, [setAnchorEl]);
+  const escFunction = useCallback(
+    (event) => {
+      if (event.keyCode === 27) {
+        setAnchorEl(null)
+      }
+    },
+    [setAnchorEl]
+  )
 
-    useEffect(() => {
-        document.addEventListener("keydown", escFunction, false);
+  useEffect(() => {
+    document.addEventListener('keydown', escFunction, false)
 
-        return () => {
-            document.removeEventListener("keydown", escFunction, false);
-        };
-    }, [escFunction]);
+    return () => {
+      document.removeEventListener('keydown', escFunction, false)
+    }
+  }, [escFunction])
 }
 export const useAnchor = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null)
 
-    useEscape(setAnchorEl)
+  useEscape(setAnchorEl)
 
-    const handleClickAway = () => {
-        setAnchorEl(null);
-    };
+  const handleClickAway = () => {
+    setAnchorEl(null)
+  }
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
 
-    return {
-        anchorEl,
-        handleClick,
-        handleClickAway
-    }
+  return {
+    anchorEl,
+    handleClick,
+    handleClickAway
+  }
 }
