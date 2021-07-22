@@ -90,8 +90,9 @@ export default function PropertyMenu({ property, onChange, value }) {
                     id='menu-list-grow'
                     onKeyDown={handleListKeyDown}
                   >
-                    {property.options.map((opt) => (
+                    {property.options.map((opt, index) => (
                       <MenuItem
+                        key={index}
                         onClick={(e) => {
                           onChange(opt)
                           handleClose(e)
