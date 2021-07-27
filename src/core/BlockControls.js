@@ -13,10 +13,12 @@ import {
   DeleteOutline,
   KeyboardArrowDown,
   KeyboardArrowUp,
+  MoreVert,
   SettingsOverscan
 } from '@material-ui/icons'
 import React from 'react'
 import PropertyMenu from './PropertyMenu'
+import QueuePlayNextIcon from '@material-ui/icons/QueuePlayNext'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,27 +29,31 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-// const commonMenu = {
-//   icon: <MoreVert />,
-//   label: "More",
-//   options: [
-//     {
-//       label: "Remove block",
-//       value: "delete",
-//       icon: <DeleteOutline style={{marginRight: 8}}/>
-//     },
-//     {
-//       label: "Move Before",
-//       value: "move_before",
-//       icon: <NavigateBefore style={{marginRight: 8}}/>
-//     },
-//     {
-//       label: "Move After",
-//       value: "move_after",
-//       icon: <NavigateNext style={{marginRight: 8}}/>
-//     },
-//   ],
-// };
+const commonMenu = {
+  icon: <MoreVert />,
+  label: 'More',
+  options: [
+    {
+      label: 'Remove block',
+      value: 'delete',
+      icon: <DeleteOutline style={{ marginRight: 8 }} />
+    },
+    {
+      label: 'Insert Before',
+      value: 'insert_before',
+      icon: (
+        <QueuePlayNextIcon
+          style={{ marginRight: 8, transform: 'scaleX(-1)' }}
+        />
+      )
+    },
+    {
+      label: 'Insert After',
+      value: 'insert_after',
+      icon: <QueuePlayNextIcon style={{ marginRight: 8 }} />
+    }
+  ]
+}
 
 const BlockControls = (props) => {
   const classes = useStyles()
@@ -62,6 +68,9 @@ const BlockControls = (props) => {
     handleUpdateComponentProp,
     handleMove,
     onRoot,
+    setFromDialogOptions,
+    openComponentDialog,
+    list,
     id
   } = props
   const open = Boolean(anchorEl)
@@ -153,32 +162,42 @@ const BlockControls = (props) => {
                       </Box>
                     </Grid>
                     <Grid item>
-                      <Tooltip title='Remove Block'>
-                        <IconButton
-                          aria-haspopup='true'
-                          onClick={() => handleRemoveBlock(id)}
-                        >
-                          <DeleteOutline />
-                        </IconButton>
-                      </Tooltip>
-                      {/* <PropertyMenu */}
-                      {/*  property={commonMenu} */}
-                      {/*  onChange={(opt) => { */}
-                      {/*    switch (opt.value) { */}
-                      {/*      case "delete": */}
-                      {/*        handleRemoveBlock(id); */}
-                      {/*        break; */}
-                      {/*      case "move_before": */}
-                      {/*        handleMove(id, -1); */}
-                      {/*        break; */}
-                      {/*      case "move_after": */}
-                      {/*        handleMove(id, 1); */}
-                      {/*        break; */}
-                      {/*      default: */}
-                      {/*        break; */}
-                      {/*    } */}
-                      {/*  }} */}
-                      {/* /> */}
+                      {/* <Tooltip title='Remove Block'> */}
+                      {/*  <IconButton */}
+                      {/*    aria-haspopup='true' */}
+                      {/*    onClick={() => handleRemoveBlock(id)} */}
+                      {/*  > */}
+                      {/*    <DeleteOutline /> */}
+                      {/*  </IconButton> */}
+                      {/* </Tooltip> */}
+                      <PropertyMenu
+                        property={commonMenu}
+                        onChange={(opt) => {
+                          switch (opt.value) {
+                            case 'delete':
+                              handleRemoveBlock(id)
+                              break
+                            case 'insert_before':
+                              setFromDialogOptions({
+                                id,
+                                list,
+                                direction: 0
+                              })
+                              openComponentDialog()
+                              break
+                            case 'insert_after':
+                              setFromDialogOptions({
+                                id,
+                                list,
+                                direction: +1
+                              })
+                              openComponentDialog()
+                              break
+                            default:
+                              break
+                          }
+                        }}
+                      />
                     </Grid>
                   </Grid>
                 </div>

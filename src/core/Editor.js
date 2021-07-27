@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Box, Grid } from '@material-ui/core'
 import ComponentDirectorySearch from './ComponentDirectorySearch'
 import { makeid } from '../utils'
+import { componentList } from '../model'
+import ComponentListBoxDialog from './ComponentListBoxDialog'
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)
@@ -11,7 +13,7 @@ const reorder = (list, startIndex, endIndex) => {
   return result
 }
 
-export const Editor =({
+export const Editor = ({
   onSelectMedia,
   mediaSourceUpdate,
   clearSourceUpdate,
@@ -20,11 +22,60 @@ export const Editor =({
   isEditing
 }) => {
   const [resourceId, setResourceId] = useState(null)
+  const [openComponentDialog, setOpenComponentDialog] = useState(false)
+  const [fromDialogOptions, setFromDialogOptions] = useState({
+    id: null,
+    direction: 0,
+    list: []
+  })
 
   const handleSelectMedia = (id) => {
     clearSourceUpdate()
     setResourceId(id)
     onSelectMedia()
+  }
+
+  const onNewComponentSideTo = (component) => {
+    setOpenComponentDialog(false)
+    const { id, direction } = fromDialogOptions
+    const newComponent = { ...component, id: makeid() }
+    setState((prevState) => {
+      const index = prevState.findIndex((x) => x.id === id)
+      if (index !== -1) {
+        const idx = index + direction
+        const array = [...prevState]
+        array.splice(idx < 0 ? 0 : idx, 0, newComponent)
+        return array
+      }
+      return prevState.map((block) => {
+        const index = block.elements.findIndex((x) => x.id === id)
+        if (index !== -1) {
+          const idx = index + direction
+          const array = [...block.elements]
+          array.splice(idx < 0 ? 0 : idx, 0, newComponent)
+          return {
+            ...block,
+            elements: array
+          }
+        }
+        return {
+          ...block,
+          elements: block.elements.map((el) => {
+            const index = el.elements.findIndex((x) => x.id === id)
+            if (index !== -1) {
+              const idx = index + direction
+              const array = [...el.elements]
+              array.splice(idx < 0 ? 0 : idx, 0, newComponent)
+              return {
+                ...el,
+                elements: array
+              }
+            }
+            return el
+          })
+        }
+      })
+    })
   }
 
   const handleNewComponent = (component, index) => {
@@ -220,6 +271,9 @@ export const Editor =({
                   id={id}
                   key={index}
                   onRoot
+                  setFromDialogOptions={setFromDialogOptions}
+                  openComponentDialog={() => setOpenComponentDialog(true)}
+                  list={componentList}
                   index={index}
                   isEditing={isEditing}
                   elements={elements}
@@ -242,6 +296,14 @@ export const Editor =({
         <Box mt={2} />
         {isEditing && (
           <ComponentDirectorySearch onComponentSelect={handleNewComponent} />
+        )}
+        {isEditing && (
+          <ComponentListBoxDialog
+            open={openComponentDialog}
+            onClose={() => setOpenComponentDialog(false)}
+            onComponentSelect={onNewComponentSideTo}
+            list={fromDialogOptions.list}
+          />
         )}
       </Box>
     </Box>

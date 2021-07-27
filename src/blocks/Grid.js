@@ -18,7 +18,7 @@ import ViewColumnIcon from '@material-ui/icons/ViewColumn'
 import ViewAgendaIcon from '@material-ui/icons/ViewAgenda'
 import { useAnchor } from '../hooks'
 import SpaceBarIcon from '@material-ui/icons/SpaceBar'
-import ComponentListBox from '../core/ComponentListBox'
+import ComponentListBoxPoper from '../core/ComponentListBoxPoper'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -44,7 +44,9 @@ function Grid(props) {
     handleInsert,
     handleMove,
     insideGrid,
-    handleReplaceComponent
+    handleReplaceComponent,
+    setFromDialogOptions,
+    openComponentDialog
   } = props
 
   const classes = useStyles()
@@ -145,13 +147,22 @@ function Grid(props) {
           ) => {
             const colSize = properties?.colSize || 'auto'
             return (
-              <MuiGrid key={index} item onClick={handleChildClick} md={colSize} xs={12}>
+              <MuiGrid
+                key={index}
+                item
+                onClick={handleChildClick}
+                md={colSize}
+                xs={12}
+              >
                 <Body
                   id={id}
+                  list={list}
                   key={index}
                   index={index}
                   isEditing={isEditing}
                   elements={elements}
+                  setFromDialogOptions={setFromDialogOptions}
+                  openComponentDialog={openComponentDialog}
                   properties={properties}
                   insideGrid
                   handleInsert={handleInsert}
@@ -170,7 +181,7 @@ function Grid(props) {
         {isEditing && (
           <MuiGrid item xs={12}>
             <Box display='flex' justifyContent='center'>
-              <ComponentListBox
+              <ComponentListBoxPoper
                 {...props}
                 list={list}
                 onComponentSelect={onComponentSelect}

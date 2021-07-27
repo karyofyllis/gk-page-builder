@@ -1,22 +1,17 @@
 import React, { useState } from 'react'
-
+import { makeStyles } from '@material-ui/core/styles'
 import {
   Card,
   CardActionArea,
   CardContent,
-  ClickAwayListener,
   Grid,
-  IconButton,
   List,
   ListItem,
-  makeStyles,
-  Popper,
   TextField,
   Typography
 } from '@material-ui/core'
-import { AddCircleOutline } from '@material-ui/icons'
 import PropTypes from 'prop-types'
-import { useEscape } from '../hooks'
+import { componentList } from '../model'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,97 +29,63 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ComponentListBox = (props) => {
+function ComponentListBox(props) {
+  const { list, onComponentSelect } = props
   const classes = useStyles()
-  const { onComponentSelect } = props
-
   const [query, setQuery] = useState('')
-  const [anchorEl, setAnchorEl] = useState(null)
-
-  const handleClick = (event) => {
-    event.stopPropagation()
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClickAway = () => {
-    setAnchorEl(null)
-  }
 
   const handleComponentSelect = (component) => {
-    setAnchorEl(null)
     setQuery('')
     onComponentSelect(component)
   }
 
-  const open = Boolean(anchorEl)
-  const id = open ? 'transitions-popper' : undefined
-
-  useEscape(setAnchorEl)
-
   return (
-    <ClickAwayListener onClickAway={handleClickAway}>
-      <div>
-        <IconButton onClick={handleClick}>
-          <AddCircleOutline />
-        </IconButton>
-        <Popper
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          style={{ zIndex: 1 }}
-          transition
-          placement='bottom-end'
-        >
-          {({ TransitionProps }) => (
-            <div className={classes.paper}>
-              <List component='nav' aria-label='main mailbox folders'>
-                <ListItem>
-                  <TextField
-                    autoFocus
-                    fullWidth
-                    placeholder='Start typing...'
-                    label='Block Library'
-                    variant='filled'
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                  />
-                </ListItem>
-                <ListItem component={Grid} container spacing={2}>
-                  {props.list
-                    .filter((x) =>
-                      x.name.toLowerCase().includes(query.toLowerCase())
-                    )
-                    .slice(0, 9)
-                    .map((component) => (
-                      <Grid item xs={4}>
-                        <Card variant='outlined'>
-                          <CardActionArea
-                            onClick={() => handleComponentSelect(component)}
-                          >
-                            <CardContent className={classes.card}>
-                              {component.icon}
-                              <Typography style={{ textAlign: 'center' }}>
-                                {component.name}
-                              </Typography>
-                            </CardContent>
-                          </CardActionArea>
-                        </Card>
-                      </Grid>
-                    ))}
-                </ListItem>
-              </List>
-            </div>
-          )}
-        </Popper>
-      </div>
-    </ClickAwayListener>
+    <div className={classes.paper}>
+      <List component='nav' aria-label='main mailbox folders'>
+        <ListItem>
+          <TextField
+            autoFocus
+            fullWidth
+            placeholder='Start typing...'
+            label='Block Library'
+            variant='filled'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </ListItem>
+        <ListItem component={Grid} container spacing={2}>
+          {list
+            .filter((x) => x.name.toLowerCase().includes(query.toLowerCase()))
+            .slice(0, 9)
+            .map((component, index) => (
+              <Grid item xs={4} key={index}>
+                <Card variant='outlined'>
+                  <CardActionArea
+                    onClick={() => handleComponentSelect(component)}
+                  >
+                    <CardContent className={classes.card}>
+                      {component.icon}
+                      <Typography style={{ textAlign: 'center' }}>
+                        {component.name}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            ))}
+        </ListItem>
+      </List>
+    </div>
   )
 }
 
 ComponentListBox.propTypes = {
-  onComponentSelect: PropTypes.func.isRequired
+  onComponentSelect: PropTypes.func.isRequired,
+  list: PropTypes.array.isRequired
 }
 
-ComponentListBox.defaultProps = {}
+ComponentListBox.defaultProps = {
+  list: componentList
+}
 
 export default ComponentListBox

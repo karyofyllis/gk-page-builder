@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core'
 import { componentList } from '../model'
 import PropTypes from 'prop-types'
-import ComponentListBox from './ComponentListBox'
+import ComponentListBoxPoper from './ComponentListBoxPoper'
 import { useEscape } from '../hooks'
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +60,7 @@ const ComponentDirectorySearch = (props) => {
     <ClickAwayListener onClickAway={handleClickAway}>
       <div>
         <Input
-          endAdornment={<ComponentListBox {...props} list={componentList} />}
+          endAdornment={<ComponentListBoxPoper {...props} list={componentList} />}
           id='component-directory-input'
           value={query}
           onClick={handleClick}
