@@ -12,13 +12,13 @@ import {
 } from '@material-ui/core'
 import { Component } from '../model'
 import { makeid } from '../utils'
-import { GridOn } from '@material-ui/icons'
+import { GridOn, ViewColumn } from '@material-ui/icons'
 import Grid from './Grid'
 
 const grids = [[12], [6, 6], [4, 8], [8, 4], [4, 4, 4], [3, 6, 3]]
 
 function SimpleGrid(props) {
-  const { id, handleReplaceComponent, icon, name, isEditing } = props
+  const { id, handleReplaceComponent, name, isEditing } = props
 
   const { handleClick, handleClickAway, anchorEl } = useAnchor()
 
@@ -48,7 +48,7 @@ function SimpleGrid(props) {
       {...props}
     >
       <Card variant='outlined' onClick={handleClick}>
-        <CardHeader title={name} avatar={icon} />
+        <CardHeader title={name} avatar={<ViewColumn />} />
         <CardContent>
           <Typography>Select the layout you want to start</Typography>
           <Box mt={2} />
@@ -74,8 +74,9 @@ const TemplateCard = ({ array, handleReplace }) => {
         <CardActionArea onClick={() => handleReplace(array)}>
           <CardContent>
             <MuiGrid container wrap='nowrap'>
-              {array.map((x) => (
+              {array.map((x, index) => (
                 <MuiGrid
+                  key={index}
                   item
                   xs={x}
                   style={{ border: '1px solid', height: 30 }}
