@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Box, Grid } from '@material-ui/core'
+import React, { useCallback, useEffect, useState, Fragment } from 'react'
+import { Box, Grid, MuiThemeProvider } from '@material-ui/core'
 import ComponentDirectorySearch from './ComponentDirectorySearch'
 import { makeid } from '../utils'
 import { componentList } from '../model'
@@ -13,13 +13,21 @@ const reorder = (list, startIndex, endIndex) => {
   return result
 }
 
+const Wrapper = (props) =>
+  props.muiTheme ? (
+    <MuiThemeProvider theme={props.muiTheme}>{props.children}</MuiThemeProvider>
+  ) : (
+    <Fragment>{props.children}</Fragment>
+  )
+
 export const Editor = ({
   onSelectMedia,
   mediaSourceUpdate,
   clearSourceUpdate,
   state,
   setState,
-  isEditing
+  isEditing,
+  theme
 }) => {
   const [resourceId, setResourceId] = useState(null)
   const [openComponentDialog, setOpenComponentDialog] = useState(false)
@@ -249,64 +257,66 @@ export const Editor = ({
   }
 
   return (
-    <Box>
+    <Wrapper theme={theme}>
       <Box>
-        <Grid container direction='column' spacing={2}>
-          {state.map(
-            (
-              {
-                render: Body,
-                props,
-                children,
-                id,
-                elements,
-                properties,
-                icon,
-                name
-              },
-              index
-            ) => (
-              <Grid item key={index}>
-                <Body
-                  id={id}
-                  key={index}
-                  onRoot
-                  setFromDialogOptions={setFromDialogOptions}
-                  openComponentDialog={() => setOpenComponentDialog(true)}
-                  list={componentList}
-                  index={index}
-                  isEditing={isEditing}
-                  elements={elements}
-                  properties={properties}
-                  icon={icon}
-                  name={name}
-                  onSelectMedia={handleSelectMedia}
-                  handleEnter={handleEnter}
-                  handleRemoveBlock={handleRemoveBlock}
-                  addElementToComponent={addElementToComponent}
-                  handleMove={handleMove}
-                  handleInsert={handleInsert}
-                  handleUpdateComponentProp={handleUpdateComponentProp}
-                  handleReplaceComponent={handleReplaceComponent}
-                />
-              </Grid>
-            )
+        <Box>
+          <Grid container direction='column' spacing={2}>
+            {state.map(
+              (
+                {
+                  render: Body,
+                  props,
+                  children,
+                  id,
+                  elements,
+                  properties,
+                  icon,
+                  name
+                },
+                index
+              ) => (
+                <Grid item key={index}>
+                  <Body
+                    id={id}
+                    key={index}
+                    onRoot
+                    setFromDialogOptions={setFromDialogOptions}
+                    openComponentDialog={() => setOpenComponentDialog(true)}
+                    list={componentList}
+                    index={index}
+                    isEditing={isEditing}
+                    elements={elements}
+                    properties={properties}
+                    icon={icon}
+                    name={name}
+                    onSelectMedia={handleSelectMedia}
+                    handleEnter={handleEnter}
+                    handleRemoveBlock={handleRemoveBlock}
+                    addElementToComponent={addElementToComponent}
+                    handleMove={handleMove}
+                    handleInsert={handleInsert}
+                    handleUpdateComponentProp={handleUpdateComponentProp}
+                    handleReplaceComponent={handleReplaceComponent}
+                  />
+                </Grid>
+              )
+            )}
+          </Grid>
+          <Box mt={2} />
+          {isEditing && (
+            <ComponentDirectorySearch onComponentSelect={handleNewComponent} />
           )}
-        </Grid>
-        <Box mt={2} />
-        {isEditing && (
-          <ComponentDirectorySearch onComponentSelect={handleNewComponent} />
-        )}
-        {isEditing && (
-          <ComponentListBoxDialog
-            open={openComponentDialog}
-            onClose={() => setOpenComponentDialog(false)}
-            onComponentSelect={onNewComponentSideTo}
-            list={fromDialogOptions.list}
-          />
-        )}
+          {isEditing && (
+            <ComponentListBoxDialog
+              open={openComponentDialog}
+              onClose={() => setOpenComponentDialog(false)}
+              onComponentSelect={onNewComponentSideTo}
+              list={fromDialogOptions.list}
+            />
+          )}
+        </Box>
       </Box>
-    </Box>
+    </Wrapper>
   )
 }
 
