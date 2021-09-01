@@ -1,13 +1,22 @@
-import React from 'react'
-import { Box, IconButton } from '@material-ui/core'
-import BlockControls from '../core/BlockControls'
-import { AddCircleOutline, RemoveCircleOutline } from '@material-ui/icons'
-import { useAnchor } from '../hooks'
+import React from "react";
+import { Box, IconButton } from "@material-ui/core";
+import BlockControls from "../core/BlockControls";
+import { AddCircleOutline, RemoveCircleOutline } from "@material-ui/icons";
+import { useAnchor } from "../hooks";
 
 function Spacer(props) {
-  const { isEditing, id, properties, handleUpdateComponentProp } = props
+  const {
+    isEditing,
+    id,
+    properties,
+    handleUpdateComponentProp,
+    setActivePopperId
+  } = props
 
-  const { handleClick, handleClickAway, anchorEl } = useAnchor()
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
 
   const padding = properties?.padding || 0
 

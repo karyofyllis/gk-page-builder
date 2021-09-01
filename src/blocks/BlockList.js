@@ -1,20 +1,23 @@
-import { Box, IconButton, Input, Tooltip, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
-import BlockControls from '../core/BlockControls'
-import { useAnchor } from '../hooks'
-import {
-  FormatBold,
-  FormatItalic,
-  FormatUnderlined,
-  TextRotateUp,
-  TextRotationDown
-} from '@material-ui/icons'
-import { ColorPicker } from 'material-ui-color'
+import { Box, IconButton, Input, Tooltip, Typography } from "@material-ui/core";
+import React, { useState } from "react";
+import BlockControls from "../core/BlockControls";
+import { useAnchor } from "../hooks";
+import { FormatBold, FormatItalic, FormatUnderlined, TextRotateUp, TextRotationDown } from "@material-ui/icons";
+import { ColorPicker } from "material-ui-color";
 
 const BlockList = (props) => {
-  const { isEditing, id, properties, handleUpdateComponentProp } = props
+  const {
+    isEditing,
+    id,
+    properties,
+    handleUpdateComponentProp,
+    setActivePopperId
+  } = props
 
-  const { handleClick, handleClickAway, anchorEl } = useAnchor()
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
 
   const items = properties?.items || []
   const fontWeight = properties?.fontWeight || 'normal'

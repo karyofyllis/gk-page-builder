@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from "react";
 
 export const useEscape = (setAnchorEl) => {
   const escFunction = useCallback(
@@ -18,7 +18,7 @@ export const useEscape = (setAnchorEl) => {
     }
   }, [escFunction])
 }
-export const useAnchor = () => {
+export const useAnchor = (id, setActivePopper) => {
   const [anchorEl, setAnchorEl] = useState(null)
 
   useEscape(setAnchorEl)
@@ -29,6 +29,7 @@ export const useAnchor = () => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
+    setActivePopper(id)
   }
 
   return {

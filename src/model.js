@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from "react";
 
 import {
   ArtTrack,
@@ -13,21 +13,21 @@ import {
   TextFields,
   Title,
   ViewColumn
-} from '@material-ui/icons'
-import Paragraph from './blocks/Paragraph'
-import Grid from './blocks/Grid'
-import { makeid } from './utils'
-import Button from './blocks/Button'
-import ImageView from './blocks/ImageView'
-import Spacer from './blocks/Spacer'
-import Divider from './blocks/Divider'
-import BlockList from './blocks/BlockList'
-import SimpleGrid from './blocks/SimpleGrid'
-import MediaAndText from './blocks/MediaAndText'
-import RichText from './blocks/RichText'
-import PlainHtml from './blocks/PlainHtml'
-import Youtube from './blocks/Youtube'
-import YouTubeIcon from '@material-ui/icons/YouTube'
+} from "@material-ui/icons";
+import Paragraph from "./blocks/Paragraph";
+import Grid from "./blocks/Grid";
+import { makeid } from "./utils";
+import Button from "./blocks/Button";
+import ImageView from "./blocks/ImageView";
+import Spacer from "./blocks/Spacer";
+import Divider from "./blocks/Divider";
+import BlockList from "./blocks/BlockList";
+import SimpleGrid from "./blocks/SimpleGrid";
+import MediaAndText from "./blocks/MediaAndText";
+import RichText from "./blocks/RichText";
+import PlainHtml from "./blocks/PlainHtml";
+import Youtube from "./blocks/Youtube";
+import YouTubeIcon from "@material-ui/icons/YouTube";
 
 // text, heading, image, list, quote, code, buttons, gallery, divider;
 

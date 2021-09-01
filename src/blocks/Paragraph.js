@@ -1,13 +1,6 @@
-import {
-  Box,
-  IconButton,
-  Input,
-  Link,
-  Tooltip,
-  Typography
-} from '@material-ui/core'
-import React, { useState } from 'react'
-import BlockControls from '../core/BlockControls'
+import { Box, IconButton, Input, Link, Tooltip, Typography } from "@material-ui/core";
+import React, { useState } from "react";
+import BlockControls from "../core/BlockControls";
 import {
   FormatBold,
   FormatItalic,
@@ -15,10 +8,10 @@ import {
   InsertLink,
   TextRotateUp,
   TextRotationDown
-} from '@material-ui/icons'
-import { useAnchor } from '../hooks'
-import { ColorPicker } from 'material-ui-color'
-import InsertDialog from '../core/InsertDialog'
+} from "@material-ui/icons";
+import { useAnchor } from "../hooks";
+import { ColorPicker } from "material-ui-color";
+import InsertDialog from "../core/InsertDialog";
 
 const Paragraph = (props) => {
   const {
@@ -28,10 +21,15 @@ const Paragraph = (props) => {
     properties,
     handleUpdateComponentProp,
     placeholder,
-    variant
+    variant,
+    setActivePopperId
   } = props
 
-  const { handleClick, handleClickAway, anchorEl } = useAnchor()
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
+
   const [openUrl, setOpenUrl] = useState(false)
 
   const value = properties?.text || ''

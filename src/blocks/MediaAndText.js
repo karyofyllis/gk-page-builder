@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
-import { Component } from '../model'
-import { FormatTextdirectionLToR, GridOn, Image } from '@material-ui/icons'
-import Grid from './Grid'
-import { makeid } from '../utils'
-import ImageView from './ImageView'
-import Paragraph from './Paragraph'
+import React, { useEffect } from "react";
+import { Component } from "../model";
+import { FormatTextdirectionLToR, GridOn, Image } from "@material-ui/icons";
+import Grid from "./Grid";
+import { makeid } from "../utils";
+import ImageView from "./ImageView";
+import Paragraph from "./Paragraph";
 
 const MediaAndText = (props) => {
   const { handleReplaceComponent, id } = props

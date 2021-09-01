@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState, Fragment } from 'react'
-import { Box, Grid, MuiThemeProvider } from '@material-ui/core'
-import ComponentDirectorySearch from './ComponentDirectorySearch'
-import { makeid } from '../utils'
-import { componentList } from '../model'
-import ComponentListBoxDialog from './ComponentListBoxDialog'
+import React, { Fragment, useCallback, useEffect, useState } from "react";
+import { Box, Grid, MuiThemeProvider } from "@material-ui/core";
+import ComponentDirectorySearch from "./ComponentDirectorySearch";
+import { makeid } from "../utils";
+import { componentList } from "../model";
+import ComponentListBoxDialog from "./ComponentListBoxDialog";
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)
@@ -29,6 +29,7 @@ export const Editor = ({
   isEditing,
   theme
 }) => {
+  const [activePopperId, setActivePopperId] = useState(null)
   const [resourceId, setResourceId] = useState(null)
   const [openComponentDialog, setOpenComponentDialog] = useState(false)
   const [fromDialogOptions, setFromDialogOptions] = useState({
@@ -297,6 +298,8 @@ export const Editor = ({
                     handleInsert={handleInsert}
                     handleUpdateComponentProp={handleUpdateComponentProp}
                     handleReplaceComponent={handleReplaceComponent}
+                    activePopperId={activePopperId}
+                    setActivePopperId={setActivePopperId}
                   />
                 </Grid>
               )

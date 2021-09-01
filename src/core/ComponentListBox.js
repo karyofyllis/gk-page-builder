@@ -1,17 +1,8 @@
-import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  Grid,
-  List,
-  ListItem,
-  TextField,
-  Typography
-} from '@material-ui/core'
-import PropTypes from 'prop-types'
-import { componentList } from '../model'
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Card, CardActionArea, CardContent, Grid, List, ListItem, TextField, Typography } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { componentList } from "../model";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

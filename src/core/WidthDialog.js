@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Dialog from '@material-ui/core/Dialog'
-import { Button, DialogActions, DialogContent, Input } from '@material-ui/core'
+import React, { useState } from "react";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "@material-ui/core/Dialog";
+import { Button, DialogActions, DialogContent, Input } from "@material-ui/core";
 
 export default function WidthDialog(props) {
   const { onClose, open, initialValue, onConfirm } = props

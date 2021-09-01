@@ -8,17 +8,11 @@ import {
   makeStyles,
   Popper,
   Tooltip
-} from '@material-ui/core'
-import {
-  DeleteOutline,
-  KeyboardArrowDown,
-  KeyboardArrowUp,
-  MoreVert,
-  SettingsOverscan
-} from '@material-ui/icons'
-import React from 'react'
-import PropertyMenu from './PropertyMenu'
-import QueuePlayNextIcon from '@material-ui/icons/QueuePlayNext'
+} from "@material-ui/core";
+import { DeleteOutline, KeyboardArrowDown, KeyboardArrowUp, MoreVert, SettingsOverscan } from "@material-ui/icons";
+import React from "react";
+import PropertyMenu from "./PropertyMenu";
+import QueuePlayNextIcon from "@material-ui/icons/QueuePlayNext";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -71,9 +65,10 @@ const BlockControls = (props) => {
     setFromDialogOptions,
     openComponentDialog,
     list,
+    activePopperId,
     id
   } = props
-  const open = Boolean(anchorEl)
+  const open = Boolean(anchorEl) && activePopperId === id
   const optionId = open ? `popper-${id}` : undefined
 
   const colSize = properties?.colSize || 'auto'

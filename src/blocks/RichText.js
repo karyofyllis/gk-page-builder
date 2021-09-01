@@ -1,19 +1,8 @@
-import React, { useCallback, useMemo } from 'react'
-import { Editable, Slate, useSlate, withReact } from 'slate-react'
-import {
-  createEditor,
-  Editor,
-  Element as SlateElement,
-  Transforms
-} from 'slate'
-import { withHistory } from 'slate-history'
-import {
-  Box,
-  IconButton,
-  Link as MuiLink,
-  Tooltip,
-  Typography
-} from '@material-ui/core'
+import React, { useCallback, useMemo } from "react";
+import { Editable, Slate, useSlate, withReact } from "slate-react";
+import { createEditor, Editor, Element as SlateElement, Transforms } from "slate";
+import { withHistory } from "slate-history";
+import { Box, IconButton, Link as MuiLink, Tooltip, Typography } from "@material-ui/core";
 import {
   Code,
   FormatAlignCenter,
@@ -29,18 +18,26 @@ import {
   Link,
   LinkOff,
   Title
-} from '@material-ui/icons'
-import { useAnchor } from '../hooks'
-import BlockControls from '../core/BlockControls'
-import isUrl from 'is-url'
+} from "@material-ui/icons";
+import { useAnchor } from "../hooks";
+import BlockControls from "../core/BlockControls";
+import isUrl from "is-url";
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 
 const RichTextText = (props) => {
-  const { isEditing, properties, handleUpdateComponentProp, id } = props
+  const {
+    isEditing,
+    properties,
+    handleUpdateComponentProp,
+    id,
+    setActivePopperId
+  } = props
 
-  const { anchorEl, handleClickAway, handleClick } = useAnchor()
-
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
   const value = properties?.value || initialValue
   const textAlign = properties?.textAlign || 'left'
 

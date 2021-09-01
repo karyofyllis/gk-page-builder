@@ -1,10 +1,10 @@
-import React from 'react'
-import BlockControls from '../core/BlockControls'
-import { useAnchor } from '../hooks'
-import AceEditor from 'react-ace'
+import React from "react";
+import BlockControls from "../core/BlockControls";
+import { useAnchor } from "../hooks";
+import AceEditor from "react-ace";
 
-import 'ace-builds/src-noconflict/mode-html'
-import 'ace-builds/src-noconflict/theme-github'
+import "ace-builds/src-noconflict/mode-html";
+import "ace-builds/src-noconflict/theme-github";
 
 function PlainHtml(props) {
   const {
@@ -12,7 +12,8 @@ function PlainHtml(props) {
     handleRemoveBlock,
     id,
     properties,
-    handleUpdateComponentProp
+    handleUpdateComponentProp,
+    setActivePopperId
   } = props
 
   const html = properties?.html || ''
@@ -21,7 +22,10 @@ function PlainHtml(props) {
     // const newValue = e.target.value;
     handleUpdateComponentProp(id, 'html', newValue)
   }
-  const { handleClick, handleClickAway, anchorEl } = useAnchor()
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
 
   return (
     <BlockControls

@@ -1,16 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import {
-  ClickAwayListener,
-  IconButton,
-  makeStyles,
-  Popper
-} from '@material-ui/core'
-import { AddCircle, AddCircleOutline } from '@material-ui/icons'
-import PropTypes from 'prop-types'
-import { useEscape } from '../hooks'
-import { componentList } from '../model'
-import ComponentListBox from './ComponentListBox'
+import { ClickAwayListener, IconButton, makeStyles, Popper } from "@material-ui/core";
+import { AddCircle, AddCircleOutline } from "@material-ui/icons";
+import PropTypes from "prop-types";
+import { useEscape } from "../hooks";
+import { componentList } from "../model";
+import ComponentListBox from "./ComponentListBox";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

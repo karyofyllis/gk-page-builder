@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
-import { Height, ImageSearch, PhotoLibrary } from '@material-ui/icons'
-import { useAnchor } from '../hooks'
-import BlockControls from '../core/BlockControls'
-import { IconButton, Tooltip } from '@material-ui/core'
-import InsertDialog from '../core/InsertDialog'
-import WidthDialog from '../core/WidthDialog'
+import React, { useState } from "react";
+import { Height, ImageSearch, PhotoLibrary } from "@material-ui/icons";
+import { useAnchor } from "../hooks";
+import BlockControls from "../core/BlockControls";
+import { IconButton, Tooltip } from "@material-ui/core";
+import InsertDialog from "../core/InsertDialog";
+import WidthDialog from "../core/WidthDialog";
 
 const ImageView = (props) => {
-  const { id, properties, handleUpdateComponentProp, onSelectMedia } = props
+  const { id, setActivePopperId, properties, handleUpdateComponentProp, onSelectMedia } = props
 
-  const { handleClick, handleClickAway, anchorEl } = useAnchor()
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
 
   const [openUrl, setOpenUrl] = useState(false)
   const [openWidth, setOpenWidth] = useState(false)

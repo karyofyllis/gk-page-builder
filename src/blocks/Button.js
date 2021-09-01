@@ -13,43 +13,46 @@ function Button(props) {
     id,
     properties,
     handleUpdateComponentProp,
-  } = props;
+    setActivePopperId
+  } = props
 
-  const {handleClick, handleClickAway, anchorEl} = useAnchor()
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
 
-  const [openUrl, setOpenUrl] = useState(false);
+  const [openUrl, setOpenUrl] = useState(false)
 
-  const value = properties?.text || "";
-  const url = properties?.url || "";
-  const variant = properties?.variant || variantProperty.options[0].value;
-  const color = properties?.color || colorProperty.options[0].value;
+  const value = properties?.text || ''
+  const url = properties?.url || ''
+  const variant = properties?.variant || variantProperty.options[0].value
+  const color = properties?.color || colorProperty.options[0].value
 
   const handleChange = (e) => {
-    const newValue = e.target.value;
-    handleUpdateComponentProp(id, "text", newValue);
-  };
+    const newValue = e.target.value
+    handleUpdateComponentProp(id, 'text', newValue)
+  }
 
   const handleDismissUrlDialog = (newValue) => {
-    handleUpdateComponentProp(id, "url", newValue);
-    setOpenUrl(false);
-  };
-
+    handleUpdateComponentProp(id, 'url', newValue)
+    setOpenUrl(false)
+  }
 
   const propertyOptions = [
     {
       custom: (
-        <Input placeholder={"Label"} onChange={handleChange} value={value} />
-      ),
+        <Input placeholder='Label' onChange={handleChange} value={value} />
+      )
     },
     {
       custom: (
         <IconButton
-          color={url ? "primary" : "default"}
+          color={url ? 'primary' : 'default'}
           onClick={() => setOpenUrl(true)}
         >
           <InsertLink />
         </IconButton>
-      ),
+      )
     },
     {
       element: (
@@ -57,21 +60,21 @@ function Button(props) {
           value={variant}
           property={variantProperty}
           onChange={(opt) =>
-            handleUpdateComponentProp(id, "variant", opt.value)
+            handleUpdateComponentProp(id, 'variant', opt.value)
           }
         />
-      ),
+      )
     },
     {
       element: (
         <PropertyMenu
           value={color}
           property={colorProperty}
-          onChange={(opt) => handleUpdateComponentProp(id, "color", opt.value)}
+          onChange={(opt) => handleUpdateComponentProp(id, 'color', opt.value)}
         />
-      ),
-    },
-  ];
+      )
+    }
+  ]
 
   return (
     <BlockControls
@@ -88,9 +91,9 @@ function Button(props) {
       ) : (
         <MuiButton
           component={url ? Link : Box}
-          href={url || "#"}
-          target={"_blank"}
-          style={{ textDecoration: "none" }}
+          href={url || '#'}
+          target='_blank'
+          style={{ textDecoration: 'none' }}
           variant={variant}
           color={color}
           onClick={handleClick}
@@ -105,45 +108,45 @@ function Button(props) {
         open={openUrl}
       />
     </BlockControls>
-  );
+  )
 }
 
-export default Button;
+export default Button
 
 const colorProperty = {
   icon: <PaletteOutlined />,
-  label: "Color",
+  label: 'Color',
   options: [
     {
-      label: "Primary",
-      value: "primary",
+      label: 'Primary',
+      value: 'primary'
     },
     {
-      label: "Secondary",
-      value: "secondary",
+      label: 'Secondary',
+      value: 'secondary'
     },
     {
-      label: "Default",
-      value: "default",
-    },
-  ],
-};
+      label: 'Default',
+      value: 'default'
+    }
+  ]
+}
 
 const variantProperty = {
   icon: <HdrStrong />,
-  label: "Variant",
+  label: 'Variant',
   options: [
     {
-      label: "Outlined",
-      value: "outlined",
+      label: 'Outlined',
+      value: 'outlined'
     },
     {
-      label: "Contained",
-      value: "contained",
+      label: 'Contained',
+      value: 'contained'
     },
     {
-      label: "Default",
-      value: "default",
-    },
-  ],
-};
+      label: 'Default',
+      value: 'default'
+    }
+  ]
+}

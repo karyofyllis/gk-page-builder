@@ -1,24 +1,24 @@
-import React from 'react'
-import { Box, Grid as MuiGrid, makeStyles } from '@material-ui/core'
+import React from "react";
+import { Box, Grid as MuiGrid, makeStyles } from "@material-ui/core";
 import {
   FormatAlignLeft,
   VerticalAlignBottom,
   VerticalAlignCenter,
   VerticalAlignTop,
   ViewAgenda
-} from '@material-ui/icons'
-import { componentList } from '../model'
-import BlockControls from '../core/BlockControls'
-import PropertyMenu from '../core/PropertyMenu'
-import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter'
-import FormatAlignJustifyIcon from '@material-ui/icons/FormatAlignJustify'
-import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft'
-import FormatAlignRightIcon from '@material-ui/icons/FormatAlignRight'
-import ViewColumnIcon from '@material-ui/icons/ViewColumn'
-import ViewAgendaIcon from '@material-ui/icons/ViewAgenda'
-import { useAnchor } from '../hooks'
-import SpaceBarIcon from '@material-ui/icons/SpaceBar'
-import ComponentListBoxPoper from '../core/ComponentListBoxPoper'
+} from "@material-ui/icons";
+import { componentList } from "../model";
+import BlockControls from "../core/BlockControls";
+import PropertyMenu from "../core/PropertyMenu";
+import FormatAlignCenterIcon from "@material-ui/icons/FormatAlignCenter";
+import FormatAlignJustifyIcon from "@material-ui/icons/FormatAlignJustify";
+import FormatAlignLeftIcon from "@material-ui/icons/FormatAlignLeft";
+import FormatAlignRightIcon from "@material-ui/icons/FormatAlignRight";
+import ViewColumnIcon from "@material-ui/icons/ViewColumn";
+import ViewAgendaIcon from "@material-ui/icons/ViewAgenda";
+import { useAnchor } from "../hooks";
+import SpaceBarIcon from "@material-ui/icons/SpaceBar";
+import ComponentListBoxPoper from "../core/ComponentListBoxPoper";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,11 +46,16 @@ function Grid(props) {
     insideGrid,
     handleReplaceComponent,
     setFromDialogOptions,
-    openComponentDialog
+    openComponentDialog,
+    setActivePopperId,
+    activePopperId
   } = props
 
   const classes = useStyles()
-  const { handleClick, handleClickAway, anchorEl } = useAnchor()
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
 
   const propertyOptions = [
     {
@@ -173,6 +178,8 @@ function Grid(props) {
                   addElementToComponent={addElementToComponent}
                   handleUpdateComponentProp={handleUpdateComponentProp}
                   handleReplaceComponent={handleReplaceComponent}
+                  activePopperId={activePopperId}
+                  setActivePopperId={setActivePopperId}
                 />
               </MuiGrid>
             )

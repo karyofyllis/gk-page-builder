@@ -1,26 +1,21 @@
-import React from 'react'
-import { useAnchor } from '../hooks'
-import BlockControls from '../core/BlockControls'
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardHeader,
-  Grid as MuiGrid,
-  Typography
-} from '@material-ui/core'
-import { Component } from '../model'
-import { makeid } from '../utils'
-import { GridOn, ViewColumn } from '@material-ui/icons'
-import Grid from './Grid'
+import React from "react";
+import { useAnchor } from "../hooks";
+import BlockControls from "../core/BlockControls";
+import { Box, Card, CardActionArea, CardContent, CardHeader, Grid as MuiGrid, Typography } from "@material-ui/core";
+import { Component } from "../model";
+import { makeid } from "../utils";
+import { GridOn, ViewColumn } from "@material-ui/icons";
+import Grid from "./Grid";
 
 const grids = [[12], [6, 6], [4, 8], [8, 4], [4, 4, 4], [3, 6, 3]]
 
 function SimpleGrid(props) {
-  const { id, handleReplaceComponent, name, isEditing } = props
+  const { id, handleReplaceComponent, name, isEditing, setActivePopperId } = props
 
-  const { handleClick, handleClickAway, anchorEl } = useAnchor()
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
 
   const handleReplace = (childrenSizes) => {
     const elements = []

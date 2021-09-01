@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import BlockControls from '../core/BlockControls'
-import { useAnchor } from '../hooks'
-import InsertDialog from '../core/InsertDialog'
-import { IconButton, Tooltip } from '@material-ui/core'
-import YouTubeIcon from '@material-ui/icons/YouTube'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useState } from "react";
+import BlockControls from "../core/BlockControls";
+import { useAnchor } from "../hooks";
+import InsertDialog from "../core/InsertDialog";
+import { IconButton, Tooltip } from "@material-ui/core";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import { makeStyles } from "@material-ui/core/styles";
 
 const styles = (theme) => ({
   root: {
@@ -36,14 +36,18 @@ function PlainHtml(props) {
     id,
     properties,
     isEditing,
-    handleUpdateComponentProp
+    handleUpdateComponentProp,
+    setActivePopperId
   } = props
 
   const [openUrl, setOpenUrl] = useState(false)
 
   const embedId = properties?.embedId || ''
 
-  const { handleClick, handleClickAway, anchorEl } = useAnchor()
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
 
   const handleDismissUrlDialog = (newValue) => {
     handleUpdateComponentProp(id, 'embedId', newValue)

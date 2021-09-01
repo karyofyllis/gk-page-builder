@@ -1,6 +1,6 @@
-import React from 'react'
-import Editor from './Editor'
-import PropTypes from 'prop-types'
+import React from "react";
+import Editor from "./Editor";
+import PropTypes from "prop-types";
 
 function Viewer(props) {
   const { state } = props

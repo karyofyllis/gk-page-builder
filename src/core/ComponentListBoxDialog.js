@@ -1,6 +1,6 @@
-import React from 'react'
-import Dialog from '@material-ui/core/Dialog'
-import ComponentListBox from './ComponentListBox'
+import React from "react";
+import Dialog from "@material-ui/core/Dialog";
+import ComponentListBox from "./ComponentListBox";
 
 export default function ComponentListBoxDialog({
   onClose,

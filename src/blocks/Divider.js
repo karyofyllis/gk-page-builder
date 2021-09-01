@@ -1,11 +1,14 @@
-import React from 'react'
-import { Box, Divider as MuiDivider } from '@material-ui/core'
-import BlockControls from '../core/BlockControls'
-import { useAnchor } from '../hooks'
+import React from "react";
+import { Box, Divider as MuiDivider } from "@material-ui/core";
+import BlockControls from "../core/BlockControls";
+import { useAnchor } from "../hooks";
 
 function Divider(props) {
-  const { handleClick, handleClickAway, anchorEl } = useAnchor()
-
+  const { id, setActivePopperId } = props
+  const { handleClick, handleClickAway, anchorEl } = useAnchor(
+    id,
+    setActivePopperId
+  )
   return (
     <BlockControls
       onClickAway={handleClickAway}
