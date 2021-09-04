@@ -82,7 +82,7 @@ function Carousel(props) {
 
   useEffect(() => {
     setCurrentIndex(0)
-  }, [colsPerSlide])
+  }, [colsPerSlide, items.length])
 
   const handlePrev = () => {
     if (currentIndex > 0) setCurrentIndex(currentIndex - 1)
