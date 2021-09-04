@@ -1,13 +1,19 @@
-import React, { useState } from "react";
-import { Height, ImageSearch, PhotoLibrary } from "@material-ui/icons";
-import { useAnchor } from "../hooks";
-import BlockControls from "../core/BlockControls";
-import { IconButton, Tooltip } from "@material-ui/core";
-import InsertDialog from "../core/InsertDialog";
-import WidthDialog from "../core/WidthDialog";
+import React, { useState } from 'react'
+import { Height, ImageSearch, PhotoLibrary } from '@material-ui/icons'
+import { useAnchor } from '../hooks'
+import BlockControls from '../core/BlockControls'
+import { IconButton, Tooltip } from '@material-ui/core'
+import InsertDialog from '../core/InsertDialog'
+import WidthDialog from '../core/WidthDialog'
 
 const ImageView = (props) => {
-  const { id, setActivePopperId, properties, handleUpdateComponentProp, onSelectMedia } = props
+  const {
+    id,
+    setActivePopperId,
+    properties,
+    handleUpdateComponentProp,
+    onSelectMedia
+  } = props
 
   const { handleClick, handleClickAway, anchorEl } = useAnchor(
     id,
@@ -80,7 +86,7 @@ const ImageView = (props) => {
       {...props}
     >
       <img
-        style={{ maxWidth: '100%', width }}
+        style={{ height: '100%', textAlign: "center", maxWidth: "100%", width }}
         onClick={handleClick}
         src={src}
         alt=''

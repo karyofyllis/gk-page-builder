@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 import {
   ArtTrack,
@@ -12,22 +12,24 @@ import {
   SpaceBarOutlined,
   TextFields,
   Title,
+  ViewCarousel,
   ViewColumn
-} from "@material-ui/icons";
-import Paragraph from "./blocks/Paragraph";
-import Grid from "./blocks/Grid";
-import { makeid } from "./utils";
-import Button from "./blocks/Button";
-import ImageView from "./blocks/ImageView";
-import Spacer from "./blocks/Spacer";
-import Divider from "./blocks/Divider";
-import BlockList from "./blocks/BlockList";
-import SimpleGrid from "./blocks/SimpleGrid";
-import MediaAndText from "./blocks/MediaAndText";
-import RichText from "./blocks/RichText";
-import PlainHtml from "./blocks/PlainHtml";
-import Youtube from "./blocks/Youtube";
-import YouTubeIcon from "@material-ui/icons/YouTube";
+} from '@material-ui/icons'
+import Paragraph from './blocks/Paragraph'
+import Grid from './blocks/Grid'
+import { makeid } from './utils'
+import Button from './blocks/Button'
+import ImageView from './blocks/ImageView'
+import Spacer from './blocks/Spacer'
+import Divider from './blocks/Divider'
+import BlockList from './blocks/BlockList'
+import SimpleGrid from './blocks/SimpleGrid'
+import MediaAndText from './blocks/MediaAndText'
+import RichText from './blocks/RichText'
+import PlainHtml from './blocks/PlainHtml'
+import Youtube from './blocks/Youtube'
+import YouTubeIcon from '@material-ui/icons/YouTube'
+import CarouselView from './blocks/CarouselView/CarouselView'
 
 // text, heading, image, list, quote, code, buttons, gallery, divider;
 
@@ -108,6 +110,9 @@ export const componentList = [
   new Component('html', 'Html', <Code />, (props) => <PlainHtml {...props} />),
   new Component('youtube', 'Youtube', <YouTubeIcon />, (props) => (
     <Youtube {...props} />
+  )),
+  new Component('carousel', 'Carousel', <ViewCarousel />, (props) => (
+    <CarouselView {...props} />
   ))
 ]
 
