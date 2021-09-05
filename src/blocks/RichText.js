@@ -1,8 +1,19 @@
-import React, { useCallback, useMemo } from "react";
-import { Editable, Slate, useSlate, withReact } from "slate-react";
-import { createEditor, Editor, Element as SlateElement, Transforms } from "slate";
-import { withHistory } from "slate-history";
-import { Box, IconButton, Link as MuiLink, Tooltip, Typography } from "@material-ui/core";
+import React, { useCallback, useMemo } from 'react'
+import { Editable, Slate, useSlate, withReact } from 'slate-react'
+import {
+  createEditor,
+  Editor,
+  Element as SlateElement,
+  Transforms
+} from 'slate'
+import { withHistory } from 'slate-history'
+import {
+  Box,
+  IconButton,
+  Link as MuiLink,
+  Tooltip,
+  Typography
+} from '@material-ui/core'
 import {
   Code,
   FormatAlignCenter,
@@ -14,14 +25,16 @@ import {
   FormatListBulleted,
   FormatListNumbered,
   FormatQuote,
+  FormatSize,
   FormatUnderlined,
   Link,
   LinkOff,
   Title
-} from "@material-ui/icons";
-import { useAnchor } from "../hooks";
-import BlockControls from "../core/BlockControls";
-import isUrl from "is-url";
+} from '@material-ui/icons'
+import { useAnchor } from '../hooks'
+import BlockControls from '../core/BlockControls'
+import isUrl from 'is-url'
+import PropertyMenu from '../core/PropertyMenu'
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 
@@ -78,6 +91,16 @@ const RichTextText = (props) => {
       )
     },
     { custom: <MarkButton format='code' title='Code' icon={<Code />} /> },
+    {
+      element: (
+        <PropertyMenu
+          property={fontSizeProperty}
+          onChange={(opt) => {
+            Editor.addMark(editor, 'fontSize', opt.value)
+          }}
+        />
+      )
+    },
     {
       custom: (
         <BlockButton format='heading-one' title='Title 1' icon={<Title />} />
@@ -261,6 +284,10 @@ const Leaf = ({ attributes, children, leaf }) => {
 
   if (leaf.underline) {
     children = <u>{children}</u>
+  }
+
+  if (leaf.fontSize) {
+    children = <span style={{ fontSize: leaf.fontSize }}>{children}</span>
   }
 
   return <span {...attributes}>{children}</span>
@@ -475,3 +502,26 @@ const initialValue = [
 ]
 
 export default RichTextText
+
+const getOptions = () => {
+  const options = []
+  for (let i = 4; i <= 36; i += 2) {
+    options.push({
+      label: i,
+      value: i + 'px'
+    })
+  }
+  for (let i = 40; i <= 72; i += 4) {
+    options.push({
+      label: i,
+      value: i + 'px'
+    })
+  }
+  return options
+}
+
+const fontSizeProperty = {
+  icon: <FormatSize />,
+  label: 'Font Size',
+  options: getOptions()
+}
