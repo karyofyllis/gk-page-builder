@@ -86,7 +86,7 @@ const ImageView = (props) => {
       {...props}
     >
       <img
-        style={{ height: '100%', textAlign: "center", maxWidth: "100%", width }}
+        style={{ textAlign: "center", maxWidth: "100%", width }}
         onClick={handleClick}
         src={src}
         alt=''

@@ -58,7 +58,7 @@ const App = () => {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        {"Use Google's location service?"}
+        {"Import Image"}
       </DialogTitle>
       <DialogContent>
         <Grid container spacing={2}>
